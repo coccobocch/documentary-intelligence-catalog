@@ -10,6 +10,9 @@ import urllib.request
 from collections import Counter
 from datetime import datetime, timezone
 
+from classify import classify_documentary
+
+
 # ============================================================
 # CONFIGURAZIONE
 # ============================================================
@@ -26,11 +29,15 @@ DOCUMENTARY_GENRE_ID = 99
 PAGES_PER_SEARCH = 15
 MIN_RUNTIME = 70
 MAX_RESULTS = 100
+MAX_DETAILED_CHECKS = 150
 
 OUTPUT_FILE = "discovery/tmdb_discovery_results.json"
 
-# Concetti particolarmente importanti per il nostro profilo.
-# Sono parole/espressioni da cercare nel testo, non ID TMDB.
+# Questi temi servono ancora per il punteggio sperimentale
+# del motore precedente.
+#
+# La nuova classificazione dei generi, invece, viene
+# eseguita separatamente da classify.py.
 
 TOPIC_GROUPS = {
     "intelligence": [
@@ -124,7 +131,6 @@ def tmdb_get(endpoint, params=None):
     params = params or {}
 
     query = urllib.parse.urlencode(params)
-
     url = "https://api.themoviedb.org/3" + endpoint
 
     if query:
@@ -147,7 +153,15 @@ def tmdb_get(endpoint, params=None):
                 return json.load(response)
 
         except urllib.error.HTTPError as error:
-            if error.code == 429 and attempt < 2:
+            if error.code in (429, 500, 502, 503, 504):
+                if attempt < 2:
+                    time.sleep(3 * (attempt + 1))
+                    continue
+
+            raise
+
+        except urllib.error.URLError:
+            if attempt < 2:
                 time.sleep(3 * (attempt + 1))
                 continue
 
@@ -253,7 +267,7 @@ def cosine_similarity(a, b):
 
 
 # ============================================================
-# ANALISI TEMATICA
+# PUNTEGGIO TEMATICO PRECEDENTE
 # ============================================================
 
 def find_topics(text):
@@ -276,9 +290,6 @@ def find_topics(text):
 
 
 def calculate_topic_score(topics):
-    # Ogni gruppo individuato contribuisce al punteggio.
-    # Il valore massimo è 100.
-
     return min(len(topics) * 20, 100)
 
 
@@ -295,7 +306,6 @@ reference_movies = []
 
 for movie_id in REFERENCE_IDS:
     movie = get_movie(movie_id)
-
     reference_movies.append(movie)
 
     print(
@@ -313,8 +323,10 @@ print("\nCerco documentari...", flush=True)
 
 candidates = {}
 
-# Ricerca dei documentari più recenti.
-# Includiamo anche film annunciati o futuri.
+# Ricerca per data di uscita.
+# Questa strategia e' ancora provvisoria:
+# successivamente introdurremo una scoperta
+# piu' ampia e indipendente dai film di riferimento.
 
 for page in range(1, PAGES_PER_SEARCH + 1):
     data = tmdb_get(
@@ -339,8 +351,8 @@ for page in range(1, PAGES_PER_SEARCH + 1):
         ):
             candidates[movie_id] = movie
 
-# Aggiungiamo i suggerimenti di TMDB
-# relativi ai due documentari di riferimento.
+
+# Suggerimenti TMDB relativi ai riferimenti.
 
 for movie_id in REFERENCE_IDS:
     print(
@@ -367,7 +379,8 @@ for movie_id in REFERENCE_IDS:
         ):
             candidates[candidate_id] = movie
 
-# Rimuoviamo i riferimenti.
+
+# Rimuoviamo i film di riferimento.
 
 for movie_id in REFERENCE_IDS:
     candidates.pop(movie_id, None)
@@ -382,7 +395,7 @@ print(
 
 
 # ============================================================
-# PRIMA CLASSIFICA: SIMILARITÀ DELLE TRAME
+# CLASSIFICA PRELIMINARE
 # ============================================================
 
 reference_texts = [
@@ -441,30 +454,28 @@ preliminary_results.sort(
 
 
 # ============================================================
-# VERIFICA DETTAGLIATA DEI CANDIDATI
+# VERIFICA E CLASSIFICAZIONE
 # ============================================================
 
 print(
-    "\nVerifico durata e keyword dei candidati...",
+    "\nVerifico e classifico i documentari...",
     flush=True,
 )
 
 results = []
 errors = []
+checked_count = 0
 
-# Esaminiamo i migliori 150 candidati.
-# Il limite contiene il numero di richieste API.
-
-for item in preliminary_results[:150]:
+for item in preliminary_results[:MAX_DETAILED_CHECKS]:
     movie = item["movie"]
     movie_id = movie["id"]
+    checked_count += 1
 
     try:
         details = get_movie(movie_id)
 
         runtime = details.get("runtime")
 
-        # La durata deve essere nota e >= 70 minuti.
         if not runtime or runtime < MIN_RUNTIME:
             continue
 
@@ -478,6 +489,27 @@ for item in preliminary_results[:150]:
 
         keywords = get_keywords(movie_id)
 
+        # ----------------------------------------------------
+        # NUOVO CLASSIFICATORE
+        # ----------------------------------------------------
+
+        classification = classify_documentary({
+            "tmdb_id": movie_id,
+            "title": details.get("title"),
+            "overview": details.get("overview"),
+            "keywords": keywords,
+            "genres": details.get("genres", []),
+            "runtime": runtime,
+        })
+
+        # Non escludiamo i needs_review.
+        # Vogliamo poter valutare i falsi positivi
+        # e i falsi negativi del classificatore.
+
+        # ----------------------------------------------------
+        # PUNTEGGIO PRECEDENTE, MANTENUTO PER CONFRONTO
+        # ----------------------------------------------------
+
         combined_text = (
             details.get("overview", "")
             + " "
@@ -486,10 +518,6 @@ for item in preliminary_results[:150]:
 
         topics = find_topics(combined_text)
         topic_score = calculate_topic_score(topics)
-
-        # Punteggio finale:
-        # 65% similarità della trama
-        # 35% pertinenza tematica
 
         final_score = (
             item["text_score"] * 0.65
@@ -514,8 +542,12 @@ for item in preliminary_results[:150]:
             "similarity_score": round(
                 item["text_score"], 2
             ),
-            "topic_score": round(topic_score, 2),
-            "final_score": round(final_score, 2),
+            "topic_score": round(
+                topic_score, 2
+            ),
+            "final_score": round(
+                final_score, 2
+            ),
             "reference_similarities": {
                 reference_movies[i]["title"]: round(
                     value * 100, 2
@@ -524,6 +556,7 @@ for item in preliminary_results[:150]:
                     item["similarities"]
                 )
             },
+            "classification": classification,
             "tmdb_url": (
                 "https://www.themoviedb.org/movie/"
                 + str(movie_id)
@@ -555,11 +588,26 @@ results.sort(
     reverse=True,
 )
 
+status_counts = Counter(
+    item["classification"]["classification_status"]
+    for item in results
+)
+
+genre_counts = Counter()
+
+for item in results:
+    genre_counts.update(
+        item["classification"]["genres"]
+    )
+
 output = {
     "generated_at": datetime.now(
         timezone.utc
     ).isoformat(),
-    "method": "TF-IDF + thematic scoring",
+    "method": (
+        "TF-IDF + thematic scoring + "
+        "weighted investigative classification"
+    ),
     "reference_movies": [
         {
             "tmdb_id": movie["id"],
@@ -568,15 +616,20 @@ output = {
         for movie in reference_movies
     ],
     "candidates_collected": len(candidate_list),
-    "candidates_verified": len(
-        preliminary_results[:150]
-    ),
+    "candidates_checked": checked_count,
     "results_count": len(results[:MAX_RESULTS]),
+    "classification_summary": {
+        "status_counts": dict(status_counts),
+        "genre_counts": dict(genre_counts),
+    },
     "errors": errors,
     "results": results[:MAX_RESULTS],
 }
 
-os.makedirs("discovery", exist_ok=True)
+os.makedirs(
+    os.path.dirname(OUTPUT_FILE),
+    exist_ok=True,
+)
 
 with open(
     OUTPUT_FILE,
@@ -590,14 +643,37 @@ with open(
         indent=2,
     )
 
+
+# ============================================================
+# RIEPILOGO NEL LOG DI GITHUB ACTIONS
+# ============================================================
+
 print("\nTOP 20 DOCUMENTARI", flush=True)
 
 for result in results[:20]:
+    classification = result["classification"]
+
     print(
         f"{result['final_score']:6.2f} | "
-        f"{result['title']} "
-        f"({result['release_date']}) | "
-        f"{result['runtime']} min",
+        f"{result['title']} | "
+        f"{classification['classification_status']} | "
+        f"{', '.join(classification['genres']) or 'nessun genere'}",
+        flush=True,
+    )
+
+print("\nRIEPILOGO CLASSIFICAZIONE", flush=True)
+
+for status, count in status_counts.most_common():
+    print(
+        f"{status}: {count}",
+        flush=True,
+    )
+
+print("\nGENERI ASSEGNATI", flush=True)
+
+for genre, count in genre_counts.most_common():
+    print(
+        f"{genre}: {count}",
         flush=True,
     )
 
