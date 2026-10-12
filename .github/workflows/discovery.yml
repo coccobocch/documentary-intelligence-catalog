@@ -20,15 +20,15 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Test API TMDB
+      - name: Analizza i film TMDB
         env:
           TMDB_READ_ACCESS_TOKEN: ${{ secrets.TMDB_READ_ACCESS_TOKEN }}
-        run: python discovery/tmdb_test.py
+        run: python discovery/tmdb_discover.py
 
-      - name: Salva risultati TMDB
+      - name: Salva risultati
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: tmdb-test-results
-          path: discovery/tmdb_test_results.json
+          name: tmdb-discovery-results
+          path: discovery/tmdb_discovery_results.json
           if-no-files-found: warn
