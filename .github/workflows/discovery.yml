@@ -1,0 +1,32 @@
+
+name: Test Documentary Discovery
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discovery:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+
+      - name: Configura Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Esegui il motore di scoperta
+        run: python discovery/discover.py
+
+      - name: Salva i risultati del test
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentary-discovery-results
+          path: discovery/candidates.json
+          if-no-files-found: warn
