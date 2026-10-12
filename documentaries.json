@@ -1,36 +1,167 @@
-
 [
   {
-    "id": "zero-days",
-    "title": "Zero Days",
-    "year": 2016,
-    "director": "Alex Gibney",
-    "category": "Cyberwarfare",
-    "description": "Un'indagine sul malware Stuxnet, sulle operazioni clandestine contro il programma nucleare iraniano e sulle implicazioni della guerra informatica.",
+    "id": "the-thin-blue-line",
+    "title": "The Thin Blue Line",
+    "year": 1988,
+    "director": "Errol Morris",
+    "category": "Criminalità e investigazioni",
+    "description": "Errore giudiziario e ricostruzione di un omicidio in Texas.",
     "sources": [
-      "https://www.imdb.com/title/tt5446858/"
+      "https://www.imdb.com/find/?q=The%20Thin%20Blue%20Line%201988"
     ],
-    "durationMinutes": 116,
-    "countries": ["Stati Uniti"],
-    "originalLanguage": "Inglese",
     "topics": [
-      "Stuxnet",
-      "Cybersecurity",
-      "Guerra cibernetica",
-      "Spionaggio",
-      "Programma nucleare iraniano",
-      "Geopolitica"
+      "Criminalità e investigazioni",
+      "Errore",
+      "Texas"
     ]
   },
   {
-    "id": "citizenfour",
-    "title": "Citizenfour",
-    "year": 2014,
-    "director": "Laura Poitras",
-    "category": "Sorveglianza",
-    "description": "Il racconto diretto delle rivelazioni di Edward Snowden sui programmi di sorveglianza della NSA.",
+    "id": "paradise-lost-the-child-murders-at-robin-hood-hills",
+    "title": "Paradise Lost: The Child Murders at Robin Hood Hills",
+    "year": 1996,
+    "director": "Joe Berlinger e Bruce Sinofsky",
+    "category": "Criminalità e investigazioni",
+    "description": "Il processo ai West Memphis Three e le controversie sulle prove.",
     "sources": [
-      "https://citizenfourfilm.com/"
+      "https://www.imdb.com/find/?q=Paradise%20Lost%3A%20The%20Child%20Murders%20at%20Robin%20Hood%20Hills%201996"
+    ],
+    "topics": [
+      "Criminalità e investigazioni",
+      "West",
+      "Memphis"
+    ]
+  },
+  {
+    "id": "capturing-the-friedmans",
+    "title": "Capturing the Friedmans",
+    "year": 2003,
+    "director": "Andrew Jarecki",
+    "category": "Criminalità e investigazioni",
+    "description": "Le accuse di abuso che sconvolsero una famiglia statunitense.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Capturing%20the%20Friedmans%202003"
+    ],
+    "topics": [
+      "Criminalità e investigazioni"
+    ]
+  },
+  {
+    "id": "murder-on-a-sunday-morning",
+    "title": "Murder on a Sunday Morning",
+    "year": 2001,
+    "director": "Jean-Xavier de Lestrade",
+    "category": "Criminalità e investigazioni",
+    "description": "La difesa di un adolescente accusato di omicidio in Florida.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Murder%20on%20a%20Sunday%20Morning%202001"
+    ],
+    "topics": [
+      "Criminalità e investigazioni",
+      "Florida"
+    ]
+  },
+  {
+    "id": "dear-zachary-a-letter-to-a-son-about-his-father",
+    "title": "Dear Zachary: A Letter to a Son About His Father",
+    "year": 2008,
+    "director": "Kurt Kuenne",
+    "category": "Criminalità e investigazioni",
+    "description": "Una vicenda familiare segnata da un omicidio e da una battaglia giudiziaria.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Dear%20Zachary%3A%20A%20Letter%20to%20a%20Son%20About%20His%20Father%202008"
+    ],
+    "topics": [
+      "Criminalità e investigazioni"
+    ]
+  },
+  {
+    "id": "the-imposter",
+    "title": "The Imposter",
+    "year": 2012,
+    "director": "Bart Layton",
+    "category": "Criminalità e investigazioni",
+    "description": "Un impostore assume l'identità di un ragazzo scomparso.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Imposter%202012"
+    ],
+    "topics": [
+      "Criminalità e investigazioni"
+    ]
+  },
+  {
+    "id": "the-central-park-five",
+    "title": "The Central Park Five",
+    "year": 2012,
+    "director": "Ken Burns, Sarah Burns e David McMahon",
+    "category": "Criminalità e investigazioni",
+    "description": "La condanna ingiusta di cinque adolescenti a New York.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Central%20Park%20Five%202012"
+    ],
+    "topics": [
+      "Criminalità e investigazioni",
+      "York"
+    ]
+  },
+  {
+    "id": "the-act-of-killing",
+    "title": "The Act of Killing",
+    "year": 2012,
+    "director": "Joshua Oppenheimer",
+    "category": "Criminalità e investigazioni",
+    "description": "Gli autori delle uccisioni di massa in Indonesia rievocano i propri crimini.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Act%20of%20Killing%202012"
+    ],
+    "topics": [
+      "Criminalità e investigazioni",
+      "Indonesia"
+    ]
+  },
+  {
+    "id": "the-look-of-silence",
+    "title": "The Look of Silence",
+    "year": 2014,
+    "director": "Joshua Oppenheimer",
+    "category": "Criminalità e investigazioni",
+    "description": "Una famiglia indonesiana affronta il passato dei massacri del 1965.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Look%20of%20Silence%202014"
+    ],
+    "topics": [
+      "Criminalità e investigazioni"
+    ]
+  },
+  {
+    "id": "the-witness",
+    "title": "The Witness",
+    "year": 2015,
+    "director": "James D. Solomon",
+    "category": "Criminalità e investigazioni",
+    "description": "Un fratello indaga sull'omicidio di Kitty Genovese.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Witness%202015"
+    ],
+    "topics": [
+      "Criminalità e investigazioni",
+      "Kitty",
+      "Genovese"
+    ]
+  },
+  {
+    "id": "the-seven-five",
+    "title": "The Seven Five",
+    "year": 2014,
+    "director": "Tiller Russell",
+    "category": "Criminalità e investigazioni",
+    "description": "Corruzione e criminalità nella polizia di New York.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Seven%20Five%202014"
+    ],
+    "topics": [
+      "Criminalità e investigazioni",
+      "Corruzione",
+      "York"
     ]
   },
   {
@@ -38,10 +169,1329 @@
     "title": "The Mole Agent",
     "year": 2020,
     "director": "Maite Alberdi",
-    "category": "Investigazioni",
-    "description": "Un anziano viene reclutato come investigatore sotto copertura all'interno di una casa di riposo cilena.",
+    "category": "Criminalità e investigazioni",
+    "description": "Un anziano si infiltra in una casa di riposo cilena per un'indagine privata.",
     "sources": [
-      "https://www.imdb.com/title/tt11394298/"
+      "https://www.imdb.com/find/?q=The%20Mole%20Agent%202020"
+    ],
+    "topics": [
+      "Criminalità e investigazioni"
+    ]
+  },
+  {
+    "id": "collective",
+    "title": "Collective",
+    "year": 2019,
+    "director": "Alexander Nanau",
+    "category": "Criminalità e investigazioni",
+    "description": "Un'inchiesta giornalistica sulla sanità romena dopo un incendio mortale.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Collective%202019"
+    ],
+    "topics": [
+      "Criminalità e investigazioni"
+    ]
+  },
+  {
+    "id": "the-tinder-swindler",
+    "title": "The Tinder Swindler",
+    "year": 2022,
+    "director": "Felicity Morris",
+    "category": "Criminalità e investigazioni",
+    "description": "Donne truffate attraverso relazioni avviate su un'app di incontri.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Tinder%20Swindler%202022"
+    ],
+    "topics": [
+      "Criminalità e investigazioni",
+      "Donne"
+    ]
+  },
+  {
+    "id": "the-perfect-neighbor",
+    "title": "The Perfect Neighbor",
+    "year": 2025,
+    "director": "Geeta Gandbhir",
+    "category": "Criminalità e investigazioni",
+    "description": "Un caso di violenza mortale e i filmati delle telecamere della polizia.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Perfect%20Neighbor%202025"
+    ],
+    "topics": [
+      "Criminalità e investigazioni"
+    ]
+  },
+  {
+    "id": "citizenfour",
+    "title": "Citizenfour",
+    "year": 2014,
+    "director": "Laura Poitras",
+    "category": "Spionaggio e intelligence",
+    "description": "Le rivelazioni di Edward Snowden sulla sorveglianza di massa.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Citizenfour%202014"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "Edward",
+      "Snowden"
+    ]
+  },
+  {
+    "id": "the-man-nobody-knew-in-search-of-my-father-cia-spymaster-william-colby",
+    "title": "The Man Nobody Knew: In Search of My Father, CIA Spymaster William Colby",
+    "year": 2011,
+    "director": "Carl Colby",
+    "category": "Spionaggio e intelligence",
+    "description": "La vita e l'eredità del direttore della CIA William Colby.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Man%20Nobody%20Knew%3A%20In%20Search%20of%20My%20Father%2C%20CIA%20Spymaster%20William%20Colby%202011"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "William",
+      "Colby"
+    ]
+  },
+  {
+    "id": "the-gatekeepers",
+    "title": "The Gatekeepers",
+    "year": 2012,
+    "director": "Dror Moreh",
+    "category": "Spionaggio e intelligence",
+    "description": "Ex dirigenti dello Shin Bet discutono le politiche di sicurezza israeliane.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Gatekeepers%202012"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "Shin"
+    ]
+  },
+  {
+    "id": "we-steal-secrets-the-story-of-wikileaks",
+    "title": "We Steal Secrets: The Story of WikiLeaks",
+    "year": 2013,
+    "director": "Alex Gibney",
+    "category": "Spionaggio e intelligence",
+    "description": "La storia di WikiLeaks e delle fughe di documenti riservati.",
+    "sources": [
+      "https://www.imdb.com/find/?q=We%20Steal%20Secrets%3A%20The%20Story%20of%20WikiLeaks%202013"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "WikiLeaks"
+    ]
+  },
+  {
+    "id": "the-unknown-known",
+    "title": "The Unknown Known",
+    "year": 2013,
+    "director": "Errol Morris",
+    "category": "Spionaggio e intelligence",
+    "description": "Donald Rumsfeld ripercorre decisioni e memorie della politica statunitense.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Unknown%20Known%202013"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "Donald",
+      "Rumsfeld"
+    ]
+  },
+  {
+    "id": "1971",
+    "title": "1971",
+    "year": 2014,
+    "director": "Johanna Hamilton",
+    "category": "Spionaggio e intelligence",
+    "description": "L'irruzione in un ufficio dell'FBI che rivelò pratiche di sorveglianza.",
+    "sources": [
+      "https://www.imdb.com/find/?q=1971%202014"
+    ],
+    "topics": [
+      "Spionaggio e intelligence"
+    ]
+  },
+  {
+    "id": "the-spymasters-cia-in-the-crosshairs",
+    "title": "The Spymasters: CIA in the Crosshairs",
+    "year": 2015,
+    "director": "Gedeon Naudet e Jules Naudet",
+    "category": "Spionaggio e intelligence",
+    "description": "Ex vertici della CIA raccontano le operazioni dopo l'11 settembre.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Spymasters%3A%20CIA%20in%20the%20Crosshairs%202015"
+    ],
+    "topics": [
+      "Spionaggio e intelligence"
+    ]
+  },
+  {
+    "id": "risk",
+    "title": "Risk",
+    "year": 2016,
+    "director": "Laura Poitras",
+    "category": "Spionaggio e intelligence",
+    "description": "Un ritratto di Julian Assange e delle controversie su WikiLeaks.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Risk%202016"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "Julian",
+      "Assange"
+    ]
+  },
+  {
+    "id": "the-oslo-diaries",
+    "title": "The Oslo Diaries",
+    "year": 2018,
+    "director": "Mor Loushy e Daniel Sivan",
+    "category": "Spionaggio e intelligence",
+    "description": "I negoziati riservati che portarono agli accordi di Oslo.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Oslo%20Diaries%202018"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "Oslo"
+    ]
+  },
+  {
+    "id": "the-panama-papers",
+    "title": "The Panama Papers",
+    "year": 2018,
+    "director": "Alex Winter",
+    "category": "Spionaggio e intelligence",
+    "description": "La fuga di documenti che svelò reti finanziarie offshore.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Panama%20Papers%202018"
+    ],
+    "topics": [
+      "Spionaggio e intelligence"
+    ]
+  },
+  {
+    "id": "the-dissident",
+    "title": "The Dissident",
+    "year": 2020,
+    "director": "Bryan Fogel",
+    "category": "Spionaggio e intelligence",
+    "description": "L'omicidio del giornalista Jamal Khashoggi e le indagini successive.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Dissident%202020"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "Jamal",
+      "Khashoggi"
+    ]
+  },
+  {
+    "id": "the-forever-prisoner",
+    "title": "The Forever Prisoner",
+    "year": 2021,
+    "director": "Alex Gibney",
+    "category": "Spionaggio e intelligence",
+    "description": "Il programma di detenzione e interrogatori della CIA dopo l'11 settembre.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Forever%20Prisoner%202021"
+    ],
+    "topics": [
+      "Spionaggio e intelligence"
+    ]
+  },
+  {
+    "id": "navalny",
+    "title": "Navalny",
+    "year": 2022,
+    "director": "Daniel Roher",
+    "category": "Spionaggio e intelligence",
+    "description": "Il tentato avvelenamento e l'attività politica di Aleksej Navalnyj.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Navalny%202022"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "Aleksej",
+      "Navalnyj"
+    ]
+  },
+  {
+    "id": "icarus",
+    "title": "Icarus",
+    "year": 2017,
+    "director": "Bryan Fogel",
+    "category": "Spionaggio e intelligence",
+    "description": "Un'indagine sul doping sportivo che arriva al sistema russo.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Icarus%202017"
+    ],
+    "topics": [
+      "Spionaggio e intelligence"
+    ]
+  },
+  {
+    "id": "the-most-dangerous-man-in-america-daniel-ellsberg-and-the-pentagon-papers",
+    "title": "The Most Dangerous Man in America: Daniel Ellsberg and the Pentagon Papers",
+    "year": 2009,
+    "director": "Judith Ehrlich e Rick Goldsmith",
+    "category": "Spionaggio e intelligence",
+    "description": "La pubblicazione dei Pentagon Papers e il dissenso contro la guerra.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Most%20Dangerous%20Man%20in%20America%3A%20Daniel%20Ellsberg%20and%20the%20Pentagon%20Papers%202009"
+    ],
+    "topics": [
+      "Spionaggio e intelligence",
+      "Pentagon",
+      "Papers"
+    ]
+  },
+  {
+    "id": "zero-days",
+    "title": "Zero Days",
+    "year": 2016,
+    "director": "Alex Gibney",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "Stuxnet e l'impiego di malware nelle operazioni contro il programma nucleare iraniano.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Zero%20Days%202016"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica",
+      "Stuxnet"
+    ]
+  },
+  {
+    "id": "the-internet-s-own-boy-the-story-of-aaron-swartz",
+    "title": "The Internet's Own Boy: The Story of Aaron Swartz",
+    "year": 2014,
+    "director": "Brian Knappenberger",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "La vita di Aaron Swartz e il dibattito sulla libertà della conoscenza.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Internet%27s%20Own%20Boy%3A%20The%20Story%20of%20Aaron%20Swartz%202014"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica",
+      "Aaron",
+      "Swartz"
+    ]
+  },
+  {
+    "id": "deep-web",
+    "title": "Deep Web",
+    "year": 2015,
+    "director": "Alex Winter",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "Silk Road, anonimato online e indagini sul mercato clandestino.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Deep%20Web%202015"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica",
+      "Silk",
+      "Road"
+    ]
+  },
+  {
+    "id": "the-hacker-wars",
+    "title": "The Hacker Wars",
+    "year": 2014,
+    "director": "Vivien Lesnik Weisman",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "Hacktivismo, sicurezza informatica e repressione giudiziaria.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Hacker%20Wars%202014"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica",
+      "Hacktivismo"
+    ]
+  },
+  {
+    "id": "terms-and-conditions-may-apply",
+    "title": "Terms and Conditions May Apply",
+    "year": 2013,
+    "director": "Cullen Hoback",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "Privacy e raccolta dei dati nelle piattaforme digitali.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Terms%20and%20Conditions%20May%20Apply%202013"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica",
+      "Privacy"
+    ]
+  },
+  {
+    "id": "the-great-hack",
+    "title": "The Great Hack",
+    "year": 2019,
+    "director": "Karim Amer e Jehane Noujaim",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "Cambridge Analytica e il mercato dei dati personali.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Great%20Hack%202019"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica",
+      "Cambridge",
+      "Analytica"
+    ]
+  },
+  {
+    "id": "the-social-dilemma",
+    "title": "The Social Dilemma",
+    "year": 2020,
+    "director": "Jeff Orlowski",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "L'influenza degli algoritmi e delle piattaforme sociali.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Social%20Dilemma%202020"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica"
+    ]
+  },
+  {
+    "id": "coded-bias",
+    "title": "Coded Bias",
+    "year": 2020,
+    "director": "Shalini Kantayya",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "Discriminazioni e limiti dei sistemi di riconoscimento algoritmico.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Coded%20Bias%202020"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica",
+      "Discriminazioni"
+    ]
+  },
+  {
+    "id": "hacking-democracy",
+    "title": "Hacking Democracy",
+    "year": 2006,
+    "director": "Simon Ardizzone e Russell Michaels",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "Vulnerabilità e trasparenza dei sistemi di voto elettronico.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Hacking%20Democracy%202006"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica"
+    ]
+  },
+  {
+    "id": "revolution-os",
+    "title": "Revolution OS",
+    "year": 2001,
+    "director": "J. T. S. Moore",
+    "category": "Cybersecurity e guerra informatica",
+    "description": "Le origini del software libero e del sistema operativo Linux.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Revolution%20OS%202001"
+    ],
+    "topics": [
+      "Cybersecurity e guerra informatica",
+      "Linux"
+    ]
+  },
+  {
+    "id": "the-fog-of-war",
+    "title": "The Fog of War",
+    "year": 2003,
+    "director": "Errol Morris",
+    "category": "Politica e geopolitica",
+    "description": "Robert McNamara riflette sulla guerra e sulle decisioni politiche.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Fog%20of%20War%202003"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Robert",
+      "McNamara"
+    ]
+  },
+  {
+    "id": "fahrenheit-9-11",
+    "title": "Fahrenheit 9/11",
+    "year": 2004,
+    "director": "Michael Moore",
+    "category": "Politica e geopolitica",
+    "description": "Una critica alla presidenza Bush e alla risposta agli attentati del 2001.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Fahrenheit%209/11%202004"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Bush"
+    ]
+  },
+  {
+    "id": "why-we-fight",
+    "title": "Why We Fight",
+    "year": 2005,
+    "director": "Eugene Jarecki",
+    "category": "Politica e geopolitica",
+    "description": "L'influenza dell'apparato militare-industriale statunitense.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Why%20We%20Fight%202005"
+    ],
+    "topics": [
+      "Politica e geopolitica"
+    ]
+  },
+  {
+    "id": "taxi-to-the-dark-side",
+    "title": "Taxi to the Dark Side",
+    "year": 2007,
+    "director": "Alex Gibney",
+    "category": "Politica e geopolitica",
+    "description": "Tortura e abusi nella guerra al terrorismo.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Taxi%20to%20the%20Dark%20Side%202007"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Tortura"
+    ]
+  },
+  {
+    "id": "no-end-in-sight",
+    "title": "No End in Sight",
+    "year": 2007,
+    "director": "Charles Ferguson",
+    "category": "Politica e geopolitica",
+    "description": "Le scelte politiche e militari durante l'occupazione dell'Iraq.",
+    "sources": [
+      "https://www.imdb.com/find/?q=No%20End%20in%20Sight%202007"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Iraq"
+    ]
+  },
+  {
+    "id": "standard-operating-procedure",
+    "title": "Standard Operating Procedure",
+    "year": 2008,
+    "director": "Errol Morris",
+    "category": "Politica e geopolitica",
+    "description": "Le fotografie e gli abusi nel carcere di Abu Ghraib.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Standard%20Operating%20Procedure%202008"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Ghraib"
+    ]
+  },
+  {
+    "id": "the-square",
+    "title": "The Square",
+    "year": 2013,
+    "director": "Jehane Noujaim",
+    "category": "Politica e geopolitica",
+    "description": "La rivoluzione egiziana raccontata dai manifestanti.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Square%202013"
+    ],
+    "topics": [
+      "Politica e geopolitica"
+    ]
+  },
+  {
+    "id": "winter-on-fire-ukraine-s-fight-for-freedom",
+    "title": "Winter on Fire: Ukraine's Fight for Freedom",
+    "year": 2015,
+    "director": "Evgeny Afineevsky",
+    "category": "Politica e geopolitica",
+    "description": "Le proteste di Euromaidan a Kiev.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Winter%20on%20Fire%3A%20Ukraine%27s%20Fight%20for%20Freedom%202015"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Euromaidan",
+      "Kiev"
+    ]
+  },
+  {
+    "id": "the-edge-of-democracy",
+    "title": "The Edge of Democracy",
+    "year": 2019,
+    "director": "Petra Costa",
+    "category": "Politica e geopolitica",
+    "description": "La crisi politica brasiliana e le istituzioni democratiche.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Edge%20of%20Democracy%202019"
+    ],
+    "topics": [
+      "Politica e geopolitica"
+    ]
+  },
+  {
+    "id": "the-war-room",
+    "title": "The War Room",
+    "year": 1993,
+    "director": "Chris Hegedus e D. A. Pennebaker",
+    "category": "Politica e geopolitica",
+    "description": "Il dietro le quinte della campagna presidenziale di Bill Clinton.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20War%20Room%201993"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Bill",
+      "Clinton"
+    ]
+  },
+  {
+    "id": "the-putin-system",
+    "title": "The Putin System",
+    "year": 2007,
+    "director": "Jean-Michel Carré",
+    "category": "Politica e geopolitica",
+    "description": "L'ascesa di Vladimir Putin e il sistema di potere russo.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Putin%20System%202007"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Vladimir",
+      "Putin"
+    ]
+  },
+  {
+    "id": "the-ambassador",
+    "title": "The Ambassador",
+    "year": 2011,
+    "director": "Mads Brügger",
+    "category": "Politica e geopolitica",
+    "description": "Un'inchiesta sotto copertura sul commercio di credenziali diplomatiche.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Ambassador%202011"
+    ],
+    "topics": [
+      "Politica e geopolitica"
+    ]
+  },
+  {
+    "id": "20-days-in-mariupol",
+    "title": "20 Days in Mariupol",
+    "year": 2023,
+    "director": "Mstyslav Chernov",
+    "category": "Politica e geopolitica",
+    "description": "Il reportage sull'assedio di Mariupol durante l'invasione russa.",
+    "sources": [
+      "https://www.imdb.com/find/?q=20%20Days%20in%20Mariupol%202023"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Mariupol"
+    ]
+  },
+  {
+    "id": "no-other-land",
+    "title": "No Other Land",
+    "year": 2024,
+    "director": "Basel Adra, Hamdan Ballal, Yuval Abraham e Rachel Szor",
+    "category": "Politica e geopolitica",
+    "description": "La vita delle comunità palestinesi di Masafer Yatta e le demolizioni.",
+    "sources": [
+      "https://www.imdb.com/find/?q=No%20Other%20Land%202024"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Masafer",
+      "Yatta"
+    ]
+  },
+  {
+    "id": "soundtrack-to-a-coup-d-etat",
+    "title": "Soundtrack to a Coup d'Etat",
+    "year": 2024,
+    "director": "Johan Grimonprez",
+    "category": "Politica e geopolitica",
+    "description": "Il Congo, la Guerra fredda e l'uso politico del jazz.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Soundtrack%20to%20a%20Coup%20d%27Etat%202024"
+    ],
+    "topics": [
+      "Politica e geopolitica",
+      "Congo",
+      "Guerra"
+    ]
+  },
+  {
+    "id": "particle-fever",
+    "title": "Particle Fever",
+    "year": 2013,
+    "director": "Mark Levinson",
+    "category": "Scienza e tecnologia",
+    "description": "La ricerca del bosone di Higgs al CERN.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Particle%20Fever%202013"
+    ],
+    "topics": [
+      "Scienza e tecnologia",
+      "Higgs",
+      "CERN"
+    ]
+  },
+  {
+    "id": "the-farthest",
+    "title": "The Farthest",
+    "year": 2017,
+    "director": "Emer Reynolds",
+    "category": "Scienza e tecnologia",
+    "description": "Le missioni Voyager e l'esplorazione del sistema solare.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Farthest%202017"
+    ],
+    "topics": [
+      "Scienza e tecnologia",
+      "Voyager"
+    ]
+  },
+  {
+    "id": "alphago",
+    "title": "AlphaGo",
+    "year": 2017,
+    "director": "Greg Kohs",
+    "category": "Scienza e tecnologia",
+    "description": "La sfida tra intelligenza artificiale e il campione di Go Lee Sedol.",
+    "sources": [
+      "https://www.imdb.com/find/?q=AlphaGo%202017"
+    ],
+    "topics": [
+      "Scienza e tecnologia",
+      "Sedol"
+    ]
+  },
+  {
+    "id": "the-most-unknown",
+    "title": "The Most Unknown",
+    "year": 2018,
+    "director": "Ian Cheney",
+    "category": "Scienza e tecnologia",
+    "description": "Scienziati di discipline diverse esplorano grandi domande irrisolte.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Most%20Unknown%202018"
+    ],
+    "topics": [
+      "Scienza e tecnologia",
+      "Scienziati"
+    ]
+  },
+  {
+    "id": "human-nature",
+    "title": "Human Nature",
+    "year": 2019,
+    "director": "Adam Bolt",
+    "category": "Scienza e tecnologia",
+    "description": "La tecnologia CRISPR e le implicazioni dell'editing genetico.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Human%20Nature%202019"
+    ],
+    "topics": [
+      "Scienza e tecnologia",
+      "CRISPR"
+    ]
+  },
+  {
+    "id": "the-inventor-out-for-blood-in-silicon-valley",
+    "title": "The Inventor: Out for Blood in Silicon Valley",
+    "year": 2019,
+    "director": "Alex Gibney",
+    "category": "Scienza e tecnologia",
+    "description": "L'ascesa e il crollo della società di analisi mediche Theranos.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Inventor%3A%20Out%20for%20Blood%20in%20Silicon%20Valley%202019"
+    ],
+    "topics": [
+      "Scienza e tecnologia",
+      "Theranos"
+    ]
+  },
+  {
+    "id": "lo-and-behold-reveries-of-the-connected-world",
+    "title": "Lo and Behold, Reveries of the Connected World",
+    "year": 2016,
+    "director": "Werner Herzog",
+    "category": "Scienza e tecnologia",
+    "description": "Origini e conseguenze sociali di Internet.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Lo%20and%20Behold%2C%20Reveries%20of%20the%20Connected%20World%202016"
+    ],
+    "topics": [
+      "Scienza e tecnologia",
+      "Origini",
+      "Internet"
+    ]
+  },
+  {
+    "id": "unknown-cosmic-time-machine",
+    "title": "Unknown: Cosmic Time Machine",
+    "year": 2023,
+    "director": "Shai Gal",
+    "category": "Scienza e tecnologia",
+    "description": "Il telescopio spaziale James Webb e le persone che lo hanno realizzato.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Unknown%3A%20Cosmic%20Time%20Machine%202023"
+    ],
+    "topics": [
+      "Scienza e tecnologia",
+      "James",
+      "Webb"
+    ]
+  },
+  {
+    "id": "the-thinking-game",
+    "title": "The Thinking Game",
+    "year": 2024,
+    "director": "Greg Kohs",
+    "category": "Scienza e tecnologia",
+    "description": "Il lavoro dei ricercatori di DeepMind sull'intelligenza artificiale.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Thinking%20Game%202024"
+    ],
+    "topics": [
+      "Scienza e tecnologia",
+      "DeepMind"
+    ]
+  },
+  {
+    "id": "general-magic",
+    "title": "General Magic",
+    "year": 2018,
+    "director": "Sarah Kerruish e Matt Maude",
+    "category": "Scienza e tecnologia",
+    "description": "Un'azienda pioniera dell'informatica mobile e le sue innovazioni.",
+    "sources": [
+      "https://www.imdb.com/find/?q=General%20Magic%202018"
+    ],
+    "topics": [
+      "Scienza e tecnologia"
+    ]
+  },
+  {
+    "id": "enron-the-smartest-guys-in-the-room",
+    "title": "Enron: The Smartest Guys in the Room",
+    "year": 2005,
+    "director": "Alex Gibney",
+    "category": "Economia e finanza",
+    "description": "Lo scandalo contabile e il fallimento di Enron.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Enron%3A%20The%20Smartest%20Guys%20in%20the%20Room%202005"
+    ],
+    "topics": [
+      "Economia e finanza",
+      "Enron"
+    ]
+  },
+  {
+    "id": "the-corporation",
+    "title": "The Corporation",
+    "year": 2003,
+    "director": "Mark Achbar e Jennifer Abbott",
+    "category": "Economia e finanza",
+    "description": "Il ruolo delle grandi imprese nella società contemporanea.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Corporation%202003"
+    ],
+    "topics": [
+      "Economia e finanza"
+    ]
+  },
+  {
+    "id": "inside-job",
+    "title": "Inside Job",
+    "year": 2010,
+    "director": "Charles Ferguson",
+    "category": "Economia e finanza",
+    "description": "Le cause e le responsabilità della crisi finanziaria del 2008.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Inside%20Job%202010"
+    ],
+    "topics": [
+      "Economia e finanza"
+    ]
+  },
+  {
+    "id": "the-queen-of-versailles",
+    "title": "The Queen of Versailles",
+    "year": 2012,
+    "director": "Lauren Greenfield",
+    "category": "Economia e finanza",
+    "description": "Una famiglia benestante durante la crisi immobiliare statunitense.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Queen%20of%20Versailles%202012"
+    ],
+    "topics": [
+      "Economia e finanza"
+    ]
+  },
+  {
+    "id": "capitalism-a-love-story",
+    "title": "Capitalism: A Love Story",
+    "year": 2009,
+    "director": "Michael Moore",
+    "category": "Economia e finanza",
+    "description": "Disuguaglianze e conseguenze sociali del capitalismo statunitense.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Capitalism%3A%20A%20Love%20Story%202009"
+    ],
+    "topics": [
+      "Economia e finanza",
+      "Disuguaglianze"
+    ]
+  },
+  {
+    "id": "betting-on-zero",
+    "title": "Betting on Zero",
+    "year": 2016,
+    "director": "Ted Braun",
+    "category": "Economia e finanza",
+    "description": "Le controversie finanziarie intorno a Herbalife.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Betting%20on%20Zero%202016"
+    ],
+    "topics": [
+      "Economia e finanza",
+      "Herbalife"
+    ]
+  },
+  {
+    "id": "the-china-hustle",
+    "title": "The China Hustle",
+    "year": 2017,
+    "director": "Jed Rothstein",
+    "category": "Economia e finanza",
+    "description": "Presunte frodi di società cinesi quotate sui mercati statunitensi.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20China%20Hustle%202017"
+    ],
+    "topics": [
+      "Economia e finanza",
+      "Presunte"
+    ]
+  },
+  {
+    "id": "american-factory",
+    "title": "American Factory",
+    "year": 2019,
+    "director": "Steven Bognar e Julia Reichert",
+    "category": "Economia e finanza",
+    "description": "Lavoratori e management in una fabbrica cinese negli Stati Uniti.",
+    "sources": [
+      "https://www.imdb.com/find/?q=American%20Factory%202019"
+    ],
+    "topics": [
+      "Economia e finanza",
+      "Lavoratori",
+      "Stati"
+    ]
+  },
+  {
+    "id": "the-price-we-pay",
+    "title": "The Price We Pay",
+    "year": 2014,
+    "director": "Harold Crooks",
+    "category": "Economia e finanza",
+    "description": "Elusione fiscale e competizione internazionale tra sistemi tributari.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Price%20We%20Pay%202014"
+    ],
+    "topics": [
+      "Economia e finanza",
+      "Elusione"
+    ]
+  },
+  {
+    "id": "the-big-sellout",
+    "title": "The Big Sellout",
+    "year": 2007,
+    "director": "Florian Opitz",
+    "category": "Economia e finanza",
+    "description": "Gli effetti delle privatizzazioni dei servizi pubblici.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Big%20Sellout%202007"
+    ],
+    "topics": [
+      "Economia e finanza"
+    ]
+  },
+  {
+    "id": "the-sorrow-and-the-pity",
+    "title": "The Sorrow and the Pity",
+    "year": 1969,
+    "director": "Marcel Ophuls",
+    "category": "Storia e conflitti",
+    "description": "Collaborazione e resistenza nella Francia occupata.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Sorrow%20and%20the%20Pity%201969"
+    ],
+    "topics": [
+      "Storia e conflitti",
+      "Collaborazione",
+      "Francia"
+    ]
+  },
+  {
+    "id": "hearts-and-minds",
+    "title": "Hearts and Minds",
+    "year": 1974,
+    "director": "Peter Davis",
+    "category": "Storia e conflitti",
+    "description": "La guerra del Vietnam e le sue conseguenze umane.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Hearts%20and%20Minds%201974"
+    ],
+    "topics": [
+      "Storia e conflitti",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "shoah",
+    "title": "Shoah",
+    "year": 1985,
+    "director": "Claude Lanzmann",
+    "category": "Storia e conflitti",
+    "description": "Testimonianze dirette sullo sterminio degli ebrei europei.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Shoah%201985"
+    ],
+    "topics": [
+      "Storia e conflitti",
+      "Testimonianze"
+    ]
+  },
+  {
+    "id": "the-war-game",
+    "title": "The War Game",
+    "year": 1966,
+    "director": "Peter Watkins",
+    "category": "Storia e conflitti",
+    "description": "Una rappresentazione documentaristica delle conseguenze di un attacco nucleare.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20War%20Game%201966"
+    ],
+    "topics": [
+      "Storia e conflitti"
+    ]
+  },
+  {
+    "id": "the-atomic-cafe",
+    "title": "The Atomic Cafe",
+    "year": 1982,
+    "director": "Jayne Loader, Kevin Rafferty e Pierce Rafferty",
+    "category": "Storia e conflitti",
+    "description": "Materiali d'archivio sulla propaganda nucleare statunitense.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Atomic%20Cafe%201982"
+    ],
+    "topics": [
+      "Storia e conflitti",
+      "Materiali"
+    ]
+  },
+  {
+    "id": "night-and-fog",
+    "title": "Night and Fog",
+    "year": 1956,
+    "director": "Alain Resnais",
+    "category": "Storia e conflitti",
+    "description": "La memoria dei campi di concentramento nazisti.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Night%20and%20Fog%201956"
+    ],
+    "topics": [
+      "Storia e conflitti"
+    ]
+  },
+  {
+    "id": "restrepo",
+    "title": "Restrepo",
+    "year": 2010,
+    "director": "Tim Hetherington e Sebastian Junger",
+    "category": "Storia e conflitti",
+    "description": "La quotidianità dei soldati in Afghanistan.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Restrepo%202010"
+    ],
+    "topics": [
+      "Storia e conflitti",
+      "Afghanistan"
+    ]
+  },
+  {
+    "id": "for-sama",
+    "title": "For Sama",
+    "year": 2019,
+    "director": "Waad al-Kateab e Edward Watts",
+    "category": "Storia e conflitti",
+    "description": "La vita di una famiglia durante l'assedio di Aleppo.",
+    "sources": [
+      "https://www.imdb.com/find/?q=For%20Sama%202019"
+    ],
+    "topics": [
+      "Storia e conflitti",
+      "Aleppo"
+    ]
+  },
+  {
+    "id": "the-last-days",
+    "title": "The Last Days",
+    "year": 1998,
+    "director": "James Moll",
+    "category": "Storia e conflitti",
+    "description": "Sopravvissuti ungheresi raccontano la deportazione nazista.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Last%20Days%201998"
+    ],
+    "topics": [
+      "Storia e conflitti",
+      "Sopravvissuti"
+    ]
+  },
+  {
+    "id": "the-memory-of-justice",
+    "title": "The Memory of Justice",
+    "year": 1976,
+    "director": "Marcel Ophuls",
+    "category": "Storia e conflitti",
+    "description": "Crimini di guerra e responsabilità individuali dal processo di Norimberga al Vietnam.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Memory%20of%20Justice%201976"
+    ],
+    "topics": [
+      "Storia e conflitti",
+      "Crimini",
+      "Norimberga"
+    ]
+  },
+  {
+    "id": "the-invisible-war",
+    "title": "The Invisible War",
+    "year": 2012,
+    "director": "Kirby Dick",
+    "category": "Società e diritti umani",
+    "description": "Le violenze sessuali nelle forze armate statunitensi.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Invisible%20War%202012"
+    ],
+    "topics": [
+      "Società e diritti umani"
+    ]
+  },
+  {
+    "id": "the-hunting-ground",
+    "title": "The Hunting Ground",
+    "year": 2015,
+    "director": "Kirby Dick",
+    "category": "Società e diritti umani",
+    "description": "Le denunce di violenza sessuale nei campus universitari.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Hunting%20Ground%202015"
+    ],
+    "topics": [
+      "Società e diritti umani"
+    ]
+  },
+  {
+    "id": "13th",
+    "title": "13th",
+    "year": 2016,
+    "director": "Ava DuVernay",
+    "category": "Società e diritti umani",
+    "description": "Carcerazione di massa e disuguaglianze razziali negli Stati Uniti.",
+    "sources": [
+      "https://www.imdb.com/find/?q=13th%202016"
+    ],
+    "topics": [
+      "Società e diritti umani",
+      "Carcerazione",
+      "Stati"
+    ]
+  },
+  {
+    "id": "i-am-not-your-negro",
+    "title": "I Am Not Your Negro",
+    "year": 2016,
+    "director": "Raoul Peck",
+    "category": "Società e diritti umani",
+    "description": "La storia del razzismo statunitense attraverso gli scritti di James Baldwin.",
+    "sources": [
+      "https://www.imdb.com/find/?q=I%20Am%20Not%20Your%20Negro%202016"
+    ],
+    "topics": [
+      "Società e diritti umani",
+      "James",
+      "Baldwin"
+    ]
+  },
+  {
+    "id": "the-work",
+    "title": "The Work",
+    "year": 2017,
+    "director": "Jairus McLeary e Gethin Aldous",
+    "category": "Società e diritti umani",
+    "description": "Un percorso di terapia di gruppo all'interno di un carcere.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Work%202017"
+    ],
+    "topics": [
+      "Società e diritti umani"
+    ]
+  },
+  {
+    "id": "the-cave",
+    "title": "The Cave",
+    "year": 2019,
+    "director": "Feras Fayyad",
+    "category": "Società e diritti umani",
+    "description": "Il lavoro di medici e infermiere in un ospedale sotterraneo siriano.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Cave%202019"
+    ],
+    "topics": [
+      "Società e diritti umani"
+    ]
+  },
+  {
+    "id": "welcome-to-chechnya",
+    "title": "Welcome to Chechnya",
+    "year": 2020,
+    "director": "David France",
+    "category": "Società e diritti umani",
+    "description": "Le persecuzioni delle persone LGBTQ in Cecenia e le reti di soccorso.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Welcome%20to%20Chechnya%202020"
+    ],
+    "topics": [
+      "Società e diritti umani",
+      "LGBTQ",
+      "Cecenia"
+    ]
+  },
+  {
+    "id": "the-territory",
+    "title": "The Territory",
+    "year": 2022,
+    "director": "Alex Pritz",
+    "category": "Società e diritti umani",
+    "description": "La difesa delle terre indigene nell'Amazzonia brasiliana.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Territory%202022"
+    ],
+    "topics": [
+      "Società e diritti umani",
+      "Amazzonia"
+    ]
+  },
+  {
+    "id": "the-eternal-memory",
+    "title": "The Eternal Memory",
+    "year": 2023,
+    "director": "Maite Alberdi",
+    "category": "Società e diritti umani",
+    "description": "Memoria, relazione e malattia nella vita di una coppia cilena.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Eternal%20Memory%202023"
+    ],
+    "topics": [
+      "Società e diritti umani",
+      "Memoria"
+    ]
+  },
+  {
+    "id": "the-alabama-solution",
+    "title": "The Alabama Solution",
+    "year": 2025,
+    "director": "Andrew Jarecki e Charlotte Kaufman",
+    "category": "Società e diritti umani",
+    "description": "Le condizioni carcerarie e le denunce di abusi in Alabama.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20Alabama%20Solution%202025"
+    ],
+    "topics": [
+      "Società e diritti umani",
+      "Alabama"
+    ]
+  },
+  {
+    "id": "an-inconvenient-truth",
+    "title": "An Inconvenient Truth",
+    "year": 2006,
+    "director": "Davis Guggenheim",
+    "category": "Ambiente e crisi globali",
+    "description": "La divulgazione dei rischi del riscaldamento globale.",
+    "sources": [
+      "https://www.imdb.com/find/?q=An%20Inconvenient%20Truth%202006"
+    ],
+    "topics": [
+      "Ambiente e crisi globali"
+    ]
+  },
+  {
+    "id": "gasland",
+    "title": "Gasland",
+    "year": 2010,
+    "director": "Josh Fox",
+    "category": "Ambiente e crisi globali",
+    "description": "Le controversie ambientali legate alla fratturazione idraulica.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Gasland%202010"
+    ],
+    "topics": [
+      "Ambiente e crisi globali"
+    ]
+  },
+  {
+    "id": "chasing-ice",
+    "title": "Chasing Ice",
+    "year": 2012,
+    "director": "Jeff Orlowski",
+    "category": "Ambiente e crisi globali",
+    "description": "Il ritiro dei ghiacciai documentato attraverso fotografie nel tempo.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Chasing%20Ice%202012"
+    ],
+    "topics": [
+      "Ambiente e crisi globali"
+    ]
+  },
+  {
+    "id": "virunga",
+    "title": "Virunga",
+    "year": 2014,
+    "director": "Orlando von Einsiedel",
+    "category": "Ambiente e crisi globali",
+    "description": "La protezione dei gorilla e i conflitti nel parco nazionale congolese.",
+    "sources": [
+      "https://www.imdb.com/find/?q=Virunga%202014"
+    ],
+    "topics": [
+      "Ambiente e crisi globali"
+    ]
+  },
+  {
+    "id": "the-true-cost",
+    "title": "The True Cost",
+    "year": 2015,
+    "director": "Andrew Morgan",
+    "category": "Ambiente e crisi globali",
+    "description": "Gli impatti sociali e ambientali dell'industria della moda.",
+    "sources": [
+      "https://www.imdb.com/find/?q=The%20True%20Cost%202015"
+    ],
+    "topics": [
+      "Ambiente e crisi globali"
     ]
   }
 ]
