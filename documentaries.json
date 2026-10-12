@@ -1,0 +1,36 @@
+
+[
+  {
+    "id": "zero-days",
+    "title": "Zero Days",
+    "year": 2016,
+    "director": "Alex Gibney",
+    "category": "Cyberwarfare",
+    "description": "Un'indagine sul malware Stuxnet, sulle operazioni clandestine contro il programma nucleare iraniano e sulle implicazioni della guerra informatica.",
+    "sources": [
+      "https://www.imdb.com/title/tt5446858/"
+    ]
+  },
+  {
+    "id": "citizenfour",
+    "title": "Citizenfour",
+    "year": 2014,
+    "director": "Laura Poitras",
+    "category": "Sorveglianza",
+    "description": "Il racconto diretto delle rivelazioni di Edward Snowden sui programmi di sorveglianza della NSA.",
+    "sources": [
+      "https://citizenfourfilm.com/"
+    ]
+  },
+  {
+    "id": "the-mole-agent",
+    "title": "The Mole Agent",
+    "year": 2020,
+    "director": "Maite Alberdi",
+    "category": "Investigazioni",
+    "description": "Un anziano viene reclutato come investigatore sotto copertura all'interno di una casa di riposo cilena.",
+    "sources": [
+      "https://www.imdb.com/title/tt11394298/"
+    ]
+  }
+]
