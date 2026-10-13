@@ -1,22 +1,24 @@
 
 """
-Documentary Intelligence
-TMDB Discovery v2 - ricerca storica e tematicamente neutrale.
+Documentary Intelligence - TMDB Discovery v3
 
-Obiettivi:
-- Cercare documentari cinematografici su tutti gli argomenti.
-- Esplorare periodi storici differenti.
-- Escludere film non ancora usciti.
-- Richiedere almeno 70 minuti di durata.
-- Conservare la classificazione a regole come confronto.
-- Non modificare documentaries.json.
-- Non utilizzare i due film di riferimento per ordinare i risultati.
+Ricerca documentari cinematografici investigativi
+di qualsiasi argomento e periodo storico.
 
-Utilizza esclusivamente la libreria standard Python.
+Fasi:
+1. Raccolta ampia da TMDB
+2. Preselezione basata sul metodo investigativo
+3. Recupero dei dettagli e delle keywords
+4. Classificazione con le regole esistenti
+5. Salvataggio di candidati e risultati diagnostici
+
+Non modifica documentaries.json.
+Non esegue modelli AI.
 """
 
 import json
 import os
+import re
 import time
 import urllib.error
 import urllib.parse
@@ -28,37 +30,28 @@ from datetime import date, datetime, timezone
 from classify import classify_documentary
 
 
-# ============================================================
-# CONFIGURAZIONE
-# ============================================================
-
 TOKEN = os.environ.get(
     "TMDB_READ_ACCESS_TOKEN", ""
 ).strip()
 
 API_BASE = "https://api.themoviedb.org/3"
-
 OUTPUT_FILE = "discovery/tmdb_discovery_results.json"
 
 MIN_RUNTIME = 70
-
-# Numero massimo di candidati per cui recuperare
-# dettagli completi e parole chiave.
-MAX_DETAILS = 240
-
-# Numero massimo di risultati salvati.
+MAX_DETAILS = 500
 MAX_RESULTS = 150
+PAGES_PER_SORT = 8
+REQUEST_DELAY = 0.08
 
-# Per ogni periodo esaminiamo piu' ordinamenti.
-# Questo riduce la dipendenza dalla sola popolarita'.
+# La quota esplorativa permette di conservare
+# documentari che non contengono parole investigative.
+EXPLORATION_FRACTION = 0.25
+
 SORT_MODES = [
     "popularity.desc",
     "vote_count.desc",
 ]
 
-PAGES_PER_SORT = 3
-
-# Periodi non sovrapposti. L'ultimo termina oggi.
 YEAR_RANGES = [
     (1970, 1989),
     (1990, 1999),
@@ -69,12 +62,84 @@ YEAR_RANGES = [
     (2024, None),
 ]
 
-REQUEST_DELAY = 0.10
+# Segnali del metodo investigativo.
+# Non sono argomenti: riguardano il modo
+# in cui il documentario affronta la storia.
+INVESTIGATIVE_SIGNALS = {
+    "investigative": 6,
+    "investigation": 6,
+    "investigates": 6,
+    "investigating": 6,
+    "uncovers": 5,
+    "uncovering": 5,
+    "exposes": 5,
+    "exposing": 5,
+    "exposé": 5,
+    "whistleblower": 5,
+    "whistleblowers": 5,
+    "cover-up": 5,
+    "cover up": 5,
+    "hidden truth": 5,
+    "hidden history": 3,
+    "corruption": 4,
+    "scandal": 4,
+    "fraud": 4,
+    "conspiracy": 3,
+    "accountability": 4,
+    "evidence": 4,
+    "classified documents": 5,
+    "secret documents": 5,
+    "leaked documents": 5,
+    "leaked": 3,
+    "revelations": 4,
+    "reveals": 3,
+    "revealing": 3,
+    "inquiry": 4,
+    "journalist": 3,
+    "journalism": 3,
+    "undercover": 5,
+    "unsolved": 3,
+    "wrongful conviction": 5,
+    "misconduct": 4,
+    "abuse of power": 5,
+    "systemic failure": 4,
+    "deception": 3,
+    "secrecy": 3,
+    "traces the origins": 2,
+    "behind the scandal": 4,
+}
 
+# Penalizzazioni per formati spesso estranei
+# all'obiettivo del catalogo.
+NEGATIVE_SIGNALS = {
+    "concert film": 12,
+    "live concert": 12,
+    "concert performance": 10,
+    "stand-up comedy": 12,
+    "stand up comedy": 12,
+    "comedy special": 12,
+    "behind the scenes": 5,
+    "making-of": 6,
+    "making of the movie": 7,
+    "cast reunion": 8,
+    "reunion special": 8,
+    "music video": 6,
+    "tour documentary": 5,
+    "sports highlights": 6,
+    "pranks": 8,
+    "stunts": 8,
+    "reality show": 8,
+    "visual poem": 5,
+    "tone poem": 5,
+}
 
-# ============================================================
-# TMDB API
-# ============================================================
+# Generi TMDB che costituiscono indizi di
+# formato non investigativo, non esclusioni.
+GENRE_PENALTIES = {
+    "Music": 4,
+    "Comedy": 3,
+}
+
 
 def tmdb_get(endpoint, params=None):
     if not TOKEN:
@@ -82,10 +147,7 @@ def tmdb_get(endpoint, params=None):
             "Secret TMDB_READ_ACCESS_TOKEN mancante."
         )
 
-    params = params or {}
-
-    query = urllib.parse.urlencode(params)
-
+    query = urllib.parse.urlencode(params or {})
     url = API_BASE + endpoint
 
     if query:
@@ -96,7 +158,7 @@ def tmdb_get(endpoint, params=None):
         headers={
             "Authorization": f"Bearer {TOKEN}",
             "Accept": "application/json",
-            "User-Agent": "DocumentaryIntelligence/2.0",
+            "User-Agent": "DocumentaryIntelligence/3.0",
         },
     )
 
@@ -106,10 +168,10 @@ def tmdb_get(endpoint, params=None):
                 request,
                 timeout=35,
             ) as response:
-                data = json.load(response)
+                result = json.load(response)
 
             time.sleep(REQUEST_DELAY)
-            return data
+            return result
 
         except urllib.error.HTTPError as error:
             if (
@@ -118,46 +180,73 @@ def tmdb_get(endpoint, params=None):
             ):
                 time.sleep(2 ** (attempt + 1))
                 continue
-
             raise
 
-        except (
-            urllib.error.URLError,
-            TimeoutError,
-        ):
+        except (urllib.error.URLError, TimeoutError):
             if attempt < 3:
                 time.sleep(2 ** (attempt + 1))
                 continue
-
             raise
 
-    raise RuntimeError(
-        f"Impossibile recuperare {endpoint}"
+
+def phrase_present(text, phrase):
+    """
+    Ricerca con confini di parola per evitare
+    corrispondenze all'interno di altre parole.
+    """
+    pattern = (
+        r"(?<!\w)"
+        + re.escape(phrase.lower())
+        + r"(?!\w)"
     )
 
+    return bool(re.search(pattern, text.lower()))
 
-# ============================================================
-# SCOPERTA PER PERIODO
-# ============================================================
+
+def preliminary_score(movie):
+    title = movie.get("title") or ""
+    overview = movie.get("overview") or ""
+
+    text = title + ". " + overview
+
+    positive = []
+    negative = []
+
+    score = 0
+
+    for phrase, weight in INVESTIGATIVE_SIGNALS.items():
+        if phrase_present(text, phrase):
+            score += weight
+            positive.append(phrase)
+
+    for phrase, weight in NEGATIVE_SIGNALS.items():
+        if phrase_present(text, phrase):
+            score -= weight
+            negative.append(phrase)
+
+    return {
+        "score": score,
+        "positive": positive,
+        "negative": negative,
+    }
+
 
 def discover_period(start_year, end_year, today):
     start_date = f"{start_year}-01-01"
 
-    if end_year is None:
-        end_date = today.isoformat()
-    else:
-        end_date = min(
+    end_date = (
+        today.isoformat()
+        if end_year is None
+        else min(
             date(end_year, 12, 31),
             today,
         ).isoformat()
+    )
 
-    candidates = {}
+    found = {}
 
     for sort_mode in SORT_MODES:
-        for page in range(
-            1,
-            PAGES_PER_SORT + 1,
-        ):
+        for page in range(1, PAGES_PER_SORT + 1):
             params = {
                 "with_genres": "99",
                 "primary_release_date.gte": start_date,
@@ -174,52 +263,31 @@ def discover_period(start_year, end_year, today):
                 params,
             )
 
-            for movie in data.get(
-                "results", []
-            ):
+            for movie in data.get("results", []):
                 movie_id = movie.get("id")
 
                 if movie_id:
-                    candidates[movie_id] = movie
+                    found[movie_id] = movie
 
-            if page >= data.get(
-                "total_pages", 0
-            ):
+            if page >= data.get("total_pages", 0):
                 break
 
-    return list(candidates.values())
+    return list(found.values())
 
 
-# ============================================================
-# DISTRIBUZIONE EQUILIBRATA
-# ============================================================
-
-def allocate_candidates(groups, limit):
-    """
-    Selezione round-robin tra periodi storici.
-
-    Non usa la somiglianza con i documentari
-    di riferimento e non privilegia un tema.
-    """
-
-    ordered = []
-
-    group_lists = [
-        list(group)
-        for group in groups
-    ]
-
+def round_robin(groups, limit):
+    result = []
     index = 0
 
-    while len(ordered) < limit:
+    while len(result) < limit:
         added = False
 
-        for group in group_lists:
+        for group in groups:
             if index < len(group):
-                ordered.append(group[index])
+                result.append(group[index])
                 added = True
 
-                if len(ordered) >= limit:
+                if len(result) >= limit:
                     break
 
         if not added:
@@ -227,33 +295,115 @@ def allocate_candidates(groups, limit):
 
         index += 1
 
-    return ordered
+    return result
 
 
-# ============================================================
-# DETTAGLI E PAROLE CHIAVE
-# ============================================================
+def select_candidates(period_groups):
+    """
+    Due percorsi indipendenti:
+    - 75% candidati con segnali investigativi
+    - 25% esplorazione senza dipendere dai segnali
+
+    Entrambi distribuiti tra i periodi storici.
+    """
+
+    scored_groups = []
+    exploration_groups = []
+
+    for group in period_groups:
+        enriched = []
+
+        for movie in group:
+            item = dict(movie)
+            item["_preliminary"] = preliminary_score(movie)
+            enriched.append(item)
+
+        ranked = sorted(
+            enriched,
+            key=lambda item: (
+                item["_preliminary"]["score"],
+                item.get("vote_count", 0),
+            ),
+            reverse=True,
+        )
+
+        scored_groups.append(ranked)
+
+        # I candidati esplorativi sono ordinati
+        # per voto/popolarita', senza richiedere
+        # parole investigative.
+        exploratory = sorted(
+            enriched,
+            key=lambda item: (
+                item.get("vote_count", 0),
+                item.get("popularity", 0),
+            ),
+            reverse=True,
+        )
+
+        exploration_groups.append(exploratory)
+
+    exploration_limit = int(
+        MAX_DETAILS * EXPLORATION_FRACTION
+    )
+
+    investigative_limit = (
+        MAX_DETAILS - exploration_limit
+    )
+
+    selected = []
+    selected_ids = set()
+
+    def add_unique(items):
+        for item in items:
+            movie_id = item.get("id")
+
+            if movie_id not in selected_ids:
+                selected.append(item)
+                selected_ids.add(movie_id)
+
+    # Sovracampioniamo per compensare
+    # i duplicati tra le due selezioni.
+    add_unique(
+        round_robin(
+            scored_groups,
+            investigative_limit,
+        )
+    )
+
+    add_unique(
+        round_robin(
+            exploration_groups,
+            MAX_DETAILS,
+        )
+    )
+
+    # Riempimento eventuale, senza duplicati.
+    if len(selected) < MAX_DETAILS:
+        add_unique(
+            round_robin(
+                scored_groups,
+                MAX_DETAILS,
+            )
+        )
+
+    return selected[:MAX_DETAILS]
+
 
 def fetch_documentary(movie_id, today):
     details = tmdb_get(
         f"/movie/{movie_id}",
-        {
-            "language": "en-US",
-        },
+        {"language": "en-US"},
     )
 
     genres = [
         item.get("name", "")
-        for item in details.get(
-            "genres", []
-        )
+        for item in details.get("genres", [])
     ]
 
     genre_ids = [
         item.get("id")
-        for item in details.get(
-            "genres", []
-        )
+        for item in details.get("genres", [])
     ]
 
     if 99 not in genre_ids:
@@ -267,47 +417,32 @@ def fetch_documentary(movie_id, today):
     ):
         return None
 
-    release_date = (
-        details.get("release_date")
-        or ""
-    )
-
-    if not release_date:
-        return None
+    release_date = details.get("release_date") or ""
 
     try:
-        release = date.fromisoformat(
-            release_date
-        )
+        released = date.fromisoformat(release_date)
     except ValueError:
         return None
 
-    if release > today:
+    if released > today:
         return None
 
-    overview = (
-        details.get("overview")
-        or ""
-    ).strip()
+    overview = (details.get("overview") or "").strip()
 
     if not overview:
         return None
 
-    keywords_data = tmdb_get(
+    keyword_data = tmdb_get(
         f"/movie/{movie_id}/keywords"
     )
 
     keywords = [
-        item.get("name", "")
-        for item in keywords_data.get(
-            "keywords", []
-        )
+        item["name"]
+        for item in keyword_data.get("keywords", [])
         if item.get("name")
     ]
 
-    poster_path = details.get(
-        "poster_path"
-    )
+    poster_path = details.get("poster_path")
 
     poster_url = (
         "https://image.tmdb.org/t/p/w500"
@@ -316,7 +451,7 @@ def fetch_documentary(movie_id, today):
         else None
     )
 
-    result = {
+    movie = {
         "tmdb_id": movie_id,
         "title": (
             details.get("title")
@@ -329,51 +464,71 @@ def fetch_documentary(movie_id, today):
         "genres": genres,
         "keywords": keywords,
         "posterUrl": poster_url,
-        "popularity": details.get(
-            "popularity", 0
-        ),
-        "vote_average": details.get(
-            "vote_average", 0
-        ),
-        "vote_count": details.get(
-            "vote_count", 0
-        ),
+        "popularity": details.get("popularity", 0),
+        "vote_average": details.get("vote_average", 0),
+        "vote_count": details.get("vote_count", 0),
         "tmdb_url": (
             "https://www.themoviedb.org/movie/"
             + str(movie_id)
         ),
     }
 
-    result["classification"] = (
-        classify_documentary(result)
+    # Valutiamo anche le keywords e i generi
+    # disponibili solo nella scheda completa.
+    text_movie = {
+        "title": movie["title"],
+        "overview": (
+            movie["overview"]
+            + ". "
+            + ". ".join(keywords)
+        ),
+    }
+
+    preliminary = preliminary_score(text_movie)
+
+    genre_penalty = sum(
+        GENRE_PENALTIES.get(genre, 0)
+        for genre in genres
     )
 
-    return result
+    preliminary["score"] -= genre_penalty
+    preliminary["genre_penalty"] = genre_penalty
+
+    movie["preliminary"] = preliminary
+
+    movie["classification"] = (
+        classify_documentary(movie)
+    )
+
+    return movie
 
 
-# ============================================================
-# ESECUZIONE
-# ============================================================
+def quality_key(movie):
+    """
+    Ordinamento per rilevanza investigativa.
+
+    Il voto TMDB viene usato soltanto come
+    criterio secondario.
+    """
+    return (
+        movie["preliminary"]["score"],
+        movie["classification"].get(
+            "investigative_score", 0
+        ),
+        movie.get("vote_count", 0),
+    )
+
 
 def main():
-    today = datetime.now(
-        timezone.utc
-    ).date()
+    today = datetime.now(timezone.utc).date()
 
     print(
-        "TMDB Discovery v2",
-        flush=True,
-    )
-
-    print(
-        "Data limite:",
-        today.isoformat(),
+        "Documentary Intelligence - Discovery v3",
         flush=True,
     )
 
     groups = []
-    discovered_ids = set()
-
+    unique_ids = set()
     errors = []
 
     for start_year, end_year in YEAR_RANGES:
@@ -384,7 +539,7 @@ def main():
         )
 
         print(
-            f"\nRicerca periodo {label}",
+            f"\nRicerca {label}",
             flush=True,
         )
 
@@ -394,72 +549,61 @@ def main():
                 end_year,
                 today,
             )
-
         except Exception as error:
             errors.append({
                 "stage": "discovery",
                 "period": label,
                 "error": str(error),
             })
-
-            print(
-                "Errore:",
-                error,
-                flush=True,
-            )
-
             groups.append([])
             continue
 
-        unique = []
+        group = []
 
         for movie in candidates:
             movie_id = movie.get("id")
 
-            if movie_id in discovered_ids:
+            if movie_id in unique_ids:
                 continue
 
-            discovered_ids.add(movie_id)
-            unique.append(movie)
+            unique_ids.add(movie_id)
+            group.append(movie)
+
+        groups.append(group)
 
         print(
-            "Candidati:",
-            len(unique),
+            f"Candidati unici: {len(group)}",
             flush=True,
         )
 
-        groups.append(unique)
-
-    candidates = allocate_candidates(
-        groups,
-        MAX_DETAILS,
-    )
+    selected = select_candidates(groups)
 
     print(
-        "\nCandidati da verificare:",
-        len(candidates),
+        f"\nSchede da verificare: {len(selected)}",
         flush=True,
     )
 
-    results = []
+    valid = []
 
     for index, candidate in enumerate(
-        candidates,
-        start=1,
+        selected, 1
     ):
         movie_id = candidate["id"]
 
         print(
-            f"[{index}/{len(candidates)}] "
+            f"[{index}/{len(selected)}] "
             f"{candidate.get('title', movie_id)}",
             flush=True,
         )
 
         try:
-            documentary = fetch_documentary(
+            movie = fetch_documentary(
                 movie_id,
                 today,
             )
+
+            if movie is not None:
+                valid.append(movie)
 
         except Exception as error:
             errors.append({
@@ -468,70 +612,58 @@ def main():
                 "error": str(error),
             })
 
-            print(
-                "Errore:",
-                error,
-                flush=True,
-            )
+    # Prima ordiniamo tutti i documentari
+    # validi e poi conserviamo i migliori.
+    valid.sort(
+        key=quality_key,
+        reverse=True,
+    )
 
-            continue
-
-        if documentary is None:
-            continue
-
-        results.append(documentary)
-
-    # Non usiamo il punteggio investigativo
-    # per decidere quali film conservare.
-    # Il file serve anche per valutare il
-    # comportamento dei classificatori.
-
-    results = results[:MAX_RESULTS]
+    results = valid[:MAX_RESULTS]
 
     status_counts = Counter()
     genre_counts = Counter()
+    decade_counts = Counter()
 
     for movie in results:
-        classification = movie[
-            "classification"
-        ]
+        classification = movie["classification"]
 
-        status_counts.update([
+        status_counts[
             classification.get(
                 "classification_status",
                 "unknown",
             )
-        ])
+        ] += 1
 
         genre_counts.update(
-            classification.get(
-                "genres", []
-            )
+            classification.get("genres", [])
         )
+
+        year = int(movie["release_date"][:4])
+        decade = f"{(year // 10) * 10}s"
+        decade_counts[decade] += 1
 
     output = {
         "generated_at": datetime.now(
             timezone.utc
         ).isoformat(),
         "method": (
-            "TMDB historical multi-period discovery v2"
+            "TMDB historical investigative discovery v3"
         ),
         "min_runtime": MIN_RUNTIME,
         "release_date_cutoff": today.isoformat(),
-        "candidates_collected": len(
-            discovered_ids
-        ),
-        "candidates_checked": len(
-            candidates
-        ),
+        "candidates_collected": len(unique_ids),
+        "candidates_checked": len(selected),
+        "valid_documentaries": len(valid),
         "results_count": len(results),
+        "preliminary_method": (
+            "investigative signals + "
+            "format penalties + exploration"
+        ),
         "classification_summary": {
-            "status_counts": dict(
-                status_counts
-            ),
-            "genre_counts": dict(
-                genre_counts
-            ),
+            "status_counts": dict(status_counts),
+            "genre_counts": dict(genre_counts),
+            "decade_counts": dict(decade_counts),
         },
         "errors": errors,
         "results": results,
@@ -560,7 +692,25 @@ def main():
     )
 
     print(
+        "Candidati raccolti:",
+        len(unique_ids),
+        flush=True,
+    )
+
+    print(
+        "Schede esaminate:",
+        len(selected),
+        flush=True,
+    )
+
+    print(
         "Documentari validi:",
+        len(valid),
+        flush=True,
+    )
+
+    print(
+        "Risultati salvati:",
         len(results),
         flush=True,
     )
@@ -576,12 +726,6 @@ def main():
     print(
         "Errori:",
         len(errors),
-        flush=True,
-    )
-
-    print(
-        "File:",
-        OUTPUT_FILE,
         flush=True,
     )
 
