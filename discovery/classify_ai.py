@@ -40,7 +40,62 @@ GENRE_THRESHOLD = 0.50
 
 # Nessuna esclusione automatica.
 # Analizziamo tutti i documentari disponibili.
-MAX_MOVIES = None
+MAX_MOVIES = 20
+
+# Campione fisso e riproducibile, non i primi 20 del file.
+# Le categorie sono ipotesi di valutazione, non verita' definitive.
+TEST_GROUPS = {
+    "investigative_examples": [
+        "Citizenfour",
+        "The Thin Blue Line",
+        "Inside Job",
+        "Collective",
+        "Black Box Diaries",
+        "The Invisible War",
+        "Dirty Wars",
+        "The Inventor: Out for Blood in Silicon Valley",
+        "Going Clear: Scientology and the Prison of Belief",
+        "The Dissident",
+    ],
+    "borderline_examples": [
+        "Super Size Me",
+        "Bowling for Columbine",
+        "The Social Dilemma",
+        "No Other Land",
+        "Paris Is Burning",
+    ],
+    "non_investigative_examples": [
+        "Jackass 3D",
+        "Stop Making Sense",
+        "Baraka",
+        "Free Solo",
+        "Harry Potter 20th Anniversary: Return to Hogwarts",
+    ],
+}
+
+
+def select_test_movies(movies):
+    by_title = {str(m.get("title", "")).casefold(): m for m in movies}
+    chosen = []
+    missing = []
+    for group, titles in TEST_GROUPS.items():
+        for title in titles:
+            movie = by_title.get(title.casefold())
+            if movie is None:
+                missing.append(title)
+                continue
+            entry = dict(movie)
+            entry["test_group"] = group
+            chosen.append(entry)
+    if missing:
+        raise ValueError(
+            "Titoli di controllo non trovati nel JSON TMDB: "
+            + ", ".join(missing)
+            + ". Verificare che il file discovery sia quello v3.1."
+        )
+    if len(chosen) != MAX_MOVIES:
+        raise ValueError("Numero inatteso di documentari nel campione")
+    return chosen
 
 
 # ============================================================
@@ -191,7 +246,7 @@ def classify_movie(classifier, movie):
     text = build_text(movie)
 
     # Prima valutiamo il tipo di documentario.
-    # Le categorie sono alternative: multi_label=False.
+    # I diversi approcci possono coesistere: multi_label=True.
 
     approach_output = classifier(
         text,
@@ -199,7 +254,7 @@ def classify_movie(classifier, movie):
         hypothesis_template=(
             "This film is {}."
         ),
-        multi_label=False,
+        multi_label=True,
         truncation=True,
     )
 
@@ -262,6 +317,7 @@ def classify_movie(classifier, movie):
     return {
         "tmdb_id": movie.get("tmdb_id"),
         "title": movie.get("title"),
+        "test_group": movie.get("test_group"),
         "best_approach": best_approach,
         "investigative_score": round(
             investigative_score, 4
@@ -270,7 +326,7 @@ def classify_movie(classifier, movie):
         "genres": selected_genres,
         "genre_scores": genre_scores,
         "classification_status": status,
-        "classification_method": "deberta_zero_shot_v1",
+        "classification_method": "deberta_zero_shot_approach_multilabel_v2",
         "model": MODEL_NAME,
         "previous_classification": movie.get(
             "classification"
@@ -299,7 +355,7 @@ def main():
     movies = data.get("results", [])
 
     if MAX_MOVIES is not None:
-        movies = movies[:MAX_MOVIES]
+        movies = select_test_movies(movies)
 
     print(
         f"Documentari da analizzare: {len(movies)}",
@@ -374,6 +430,9 @@ def main():
             timezone.utc
         ).isoformat(),
         "model": MODEL_NAME,
+        "experiment": "curated_20_multilabel_approach_v2",
+        "sample_groups": {key: len(value) for key, value in TEST_GROUPS.items()},
+        "score_note": "Zero-shot scores are not calibrated probabilities.",
         "input_file": INPUT_FILE,
         "movies_analyzed": len(results),
         "investigative_threshold": INVESTIGATIVE_THRESHOLD,
